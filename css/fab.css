@@ -1,0 +1,203 @@
+/* fab.css — boutons de contact flottants (téléphone, WhatsApp, e-mail ; barre d'appel sur mobile)
+   Partagé par : index.html, les 3 pages de zone et blog.html. Le comportement est dans main.js. */
+/* ─── FAB STICKY ─── */
+.fab-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+/* Bulle de tooltip */
+.fab-tooltip {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  border: 1px solid rgba(201,150,60,0.3);
+  position: absolute;
+  right: 68px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+}
+
+.fab-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right: none;
+  border-left-color: var(--navy);
+}
+
+.fab-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fab-item:hover .fab-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Bouton principal — appel téléphonique */
+.fab-main {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(201,150,60,0.45), 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  animation: fab-pulse 2.5s ease-in-out infinite;
+  border: 3px solid rgba(255,255,255,0.25);
+}
+
+.fab-main:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 10px 32px rgba(201,150,60,0.6), 0 4px 12px rgba(0,0,0,0.2);
+  animation: none;
+}
+
+/* Bouton secondaire — WhatsApp */
+.fab-secondary {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #25D366;
+  color: var(--navy);          /* icône marine : lisible sur le vert */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0.7) translateY(10px);
+  pointer-events: none;
+}
+
+.fab-secondary.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: all;
+}
+
+.fab-secondary:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(37,211,102,0.55);
+}
+
+/* Bouton tertiaire — email */
+.fab-tertiary {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(22,37,56,0.35);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(201,150,60,0.3);
+  opacity: 0;
+  transform: scale(0.7) translateY(10px);
+  pointer-events: none;
+}
+
+.fab-tertiary.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: all;
+  transition-delay: 0.05s;
+}
+
+.fab-tertiary:hover {
+  background: rgba(22,37,56,0.95);
+  transform: scale(1.08);
+}
+
+/* Pulse animation */
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 6px 24px rgba(201,150,60,0.45), 0 0 0 0 rgba(201,150,60,0.4); }
+  50% { box-shadow: 0 6px 24px rgba(201,150,60,0.45), 0 0 0 12px rgba(201,150,60,0); }
+}
+
+/* Bannière mobile sticky en bas */
+.fab-mobile-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0.8rem 1.2rem;
+  background: var(--navy);
+  border-top: 2px solid var(--gold);
+  gap: 0.75rem;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+}
+
+.fab-mobile-bar a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 0.5rem;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+
+.fab-mobile-call {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.fab-mobile-whatsapp {
+  background: #25D366;
+  color: var(--navy);          /* texte marine : 7,8:1 (le blanc ne faisait que 2:1) */
+}
+
+.fab-mobile-call:hover { background: var(--gold-light); }
+.fab-mobile-whatsapp:hover { background: #1fb858; }
+
+@media (max-width: 768px) {
+  .fab-container { display: none; }
+  .fab-mobile-bar { display: flex; }
+
+  /* Compensate body padding for mobile bar */
+  body { padding-bottom: 72px; }
+}
+
+/* Masqués (et non focusables) tant que la page n'a pas défilé */
+.fab-container, .fab-mobile-bar { visibility: hidden; }
+.fab-container.is-shown, .fab-mobile-bar.is-shown { visibility: visible; }
