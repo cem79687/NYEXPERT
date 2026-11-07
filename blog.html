@@ -36,6 +36,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css?v=5">
     <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/fab.css">
+  <style>
+    .blog-cta { background: var(--navy); border-top: 2px solid var(--gold); padding: 4.5rem 0; text-align: center; }
+    .blog-cta h2 { color: var(--white); font-weight: 400; font-style: italic; font-size: clamp(1.9rem, 3.4vw, 2.8rem); margin: 0 auto 1rem; max-width: 24ch; text-wrap: balance; }
+    .blog-cta p { color: rgba(255,255,255,0.74); margin: 0 auto 2rem; max-width: 460px; }
+    .blog-cta-btn { display: inline-flex; align-items: center; gap: .7rem; padding: 1rem 2rem; background: var(--gold); color: var(--navy); font-weight: 600; font-size: .92rem; letter-spacing: .04em; text-decoration: none; border-radius: var(--radius-md); transition: background .25s ease, transform .25s ease; }
+    .blog-cta-btn:hover, .blog-cta-btn:focus-visible { background: var(--gold-light); transform: translateY(-2px); }
+    .blog-cta-btn .icon { width: 1.1em; height: 1.1em; transition: transform .25s ease; }
+    .blog-cta-btn:hover .icon { transform: translateX(3px); }
+  </style>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -50,6 +60,7 @@
   <path d="m15 9-6 6" />
   <path d="m9 9 6 6" /></symbol>
   <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+  <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol>
 </svg>
   <a class="skip-link" href="#main-content">Passer au contenu principal</a>
   <header>
@@ -202,6 +213,14 @@
 
     </div>
   </section>
+
+  <section class="blog-cta">
+    <div class="container">
+      <h2>Une question sur votre bien&nbsp;?</h2>
+      <p>Premier échange gratuit, sans engagement. Réponse sous 24&nbsp;h.</p>
+      <a href="contact.html" class="blog-cta-btn">Demander un devis gratuit <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </section>
   </main>
   <footer>
     <div class="container">
@@ -231,6 +250,44 @@
       </div>
     </div>
   </footer>
+
+  <!-- ─── FAB STICKY DESKTOP ─── -->
+  <div class="fab-container" id="fabContainer">
+    <!-- Email -->
+    <div class="fab-item" style="transition-delay: 0.1s">
+      <div class="fab-tooltip" aria-hidden="true">Envoyer un email</div>
+      <a href="mailto:yazgoren.expertbatiment@gmail.com" class="fab-tertiary" id="fabEmail" aria-label="Envoyer un email">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
+      </a>
+    </div>
+    <!-- WhatsApp -->
+    <div class="fab-item">
+      <div class="fab-tooltip" aria-hidden="true">WhatsApp</div>
+      <a href="https://wa.me/33769522890?text=Bonjour%2C%20je%20souhaite%20une%20expertise%20b%C3%A2timent." class="fab-secondary" id="fabWhatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg>
+      </a>
+    </div>
+    <!-- Téléphone — bouton principal -->
+    <div class="fab-item">
+      <div class="fab-tooltip" aria-hidden="true">+33 7 69 52 28 90</div>
+      <a href="tel:+33769522890" class="fab-main" aria-label="Appeler Nurset YAZGOREN">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── BARRE MOBILE STICKY ─── -->
+  <div class="fab-mobile-bar" id="fabMobileBar">
+    <a href="tel:+33769522890" class="fab-mobile-call">
+      
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Appeler
+    </a>
+    <a href="https://wa.me/33769522890?text=Bonjour%2C%20je%20souhaite%20une%20expertise%20b%C3%A2timent." class="fab-mobile-whatsapp" target="_blank" rel="noopener noreferrer">
+      
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg> WhatsApp
+    </a>
+  </div>
+
   <script src="main.js"></script>
   <script>
     const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:.1});
