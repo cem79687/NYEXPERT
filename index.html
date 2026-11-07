@@ -66,6 +66,7 @@
   <link rel="preload" as="image" href="img/expert.webp" media="(min-width: 761px)" fetchpriority="high">
   <link rel="stylesheet" href="style.css?v=5">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/fab.css">
   <style>
     /* Spécifique accueil — ex-styles inline. À migrer plus tard dans css/home.css */
     .no-js .fade-up { opacity: 1; transform: none; }
@@ -101,8 +102,6 @@
     .footer-legal-link { color: rgba(255,255,255,0.78); text-decoration: none; }
 
     /* FAB : masqué (et non focusable) tant que la page n'a pas défilé */
-    .fab-container, .fab-mobile-bar { visibility: hidden; }
-    .fab-container.is-shown, .fab-mobile-bar.is-shown { visibility: visible; }
   </style>
 </head>
 <body>
@@ -777,48 +776,17 @@ Ma promesse ? Une indépendance absolue. Je n'ai aucun lien avec les entreprises
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
-    // ─── Scroll : fond du header + affichage des boutons de contact (un seul listener) ───
+    // ─── Scroll : fond du header (les boutons flottants sont gérés par main.js) ───
     const header = document.querySelector('header');
-    const fabContainer = document.getElementById('fabContainer');
-    const fabMobile = document.getElementById('fabMobileBar');
     let ticking = false;
-
     function onScroll() {
-      const y = window.scrollY;
-      header.style.background = y > 60 ? 'rgba(22, 37, 56, 0.99)' : 'rgba(22, 37, 56, 0.97)';
-      const show = y > 300;
-      if (fabContainer) {
-        fabContainer.style.opacity = show ? '1' : '0';
-        fabContainer.classList.toggle('is-shown', show);
-      }
-      if (fabMobile) {
-        fabMobile.style.transform = show ? 'translateY(0)' : 'translateY(100%)';
-        fabMobile.classList.toggle('is-shown', show);
-      }
+      header.style.background = window.scrollY > 60 ? 'rgba(22, 37, 56, 0.99)' : 'rgba(22, 37, 56, 0.97)';
       ticking = false;
     }
     window.addEventListener('scroll', () => {
       if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
     }, { passive: true });
-
-    if (fabContainer) fabContainer.style.transition = 'opacity 0.4s ease';
-    if (fabMobile) fabMobile.style.transition = 'transform 0.4s ease';
     onScroll();
-
-    // ─── FAB : sous-boutons visibles au survol ET au focus clavier ───
-    if (fabContainer) {
-      const fabEmail = document.getElementById('fabEmail');
-      const fabWhatsapp = document.getElementById('fabWhatsapp');
-      const setExpanded = (on) => {
-        [fabEmail, fabWhatsapp].forEach((el) => el && el.classList.toggle('visible', on));
-      };
-      fabContainer.addEventListener('mouseenter', () => setExpanded(true));
-      fabContainer.addEventListener('mouseleave', () => setExpanded(false));
-      fabContainer.addEventListener('focusin', () => setExpanded(true));
-      fabContainer.addEventListener('focusout', (e) => {
-        if (!fabContainer.contains(e.relatedTarget)) setExpanded(false);
-      });
-    }
 
   </script>
 </body>
