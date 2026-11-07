@@ -64,4 +64,40 @@ document.addEventListener('DOMContentLoaded', () => {
     item.querySelectorAll('.nav-sub a').forEach((a) => a.addEventListener('click', closeSub));
   });
 
+
+  // Boutons de contact flottants : apparaissent après un peu de défilement (si présents sur la page)
+  const fabContainer = document.getElementById('fabContainer');
+  const fabMobile = document.getElementById('fabMobileBar');
+  if (fabContainer || fabMobile) {
+    if (fabContainer) fabContainer.style.transition = 'opacity 0.4s ease';
+    if (fabMobile) fabMobile.style.transition = 'transform 0.4s ease';
+    let fabTicking = false;
+    const updateFab = () => {
+      const show = window.scrollY > 300;
+      if (fabContainer) {
+        fabContainer.style.opacity = show ? '1' : '0';
+        fabContainer.classList.toggle('is-shown', show);
+      }
+      if (fabMobile) {
+        fabMobile.style.transform = show ? 'translateY(0)' : 'translateY(100%)';
+        fabMobile.classList.toggle('is-shown', show);
+      }
+      fabTicking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!fabTicking) { fabTicking = true; requestAnimationFrame(updateFab); }
+    }, { passive: true });
+    updateFab();
+
+    // sous-boutons (e-mail, WhatsApp) visibles au survol ET au focus clavier
+    if (fabContainer) {
+      const sub = [document.getElementById('fabEmail'), document.getElementById('fabWhatsapp')];
+      const setExpanded = (on) => sub.forEach((el) => el && el.classList.toggle('visible', on));
+      fabContainer.addEventListener('mouseenter', () => setExpanded(true));
+      fabContainer.addEventListener('mouseleave', () => setExpanded(false));
+      fabContainer.addEventListener('focusin', () => setExpanded(true));
+      fabContainer.addEventListener('focusout', (e) => { if (!fabContainer.contains(e.relatedTarget)) setExpanded(false); });
+    }
+  }
+
 });
