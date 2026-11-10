@@ -59,9 +59,10 @@
   ]
 }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/cormorant-garamond-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="preload" as="image" href="img/expert-mobile.webp" media="(max-width: 760px)" fetchpriority="high">
   <link rel="preload" as="image" href="img/expert.webp" media="(min-width: 761px)" fetchpriority="high">
   <link rel="stylesheet" href="style.css?v=5">
@@ -435,7 +436,7 @@ Ma promesse ? Une indépendance absolue. Je n'ai aucun lien avec les entreprises
       <div class="tarifs-header fade-up">
         <div class="section-label is-centered">
           <div class="line"></div>
-          <span>Investissement</span>
+          <span>Tarifs</span>
         </div>
         <h2>Tarifs transparents</h2>
         <p>Des fourchettes indicatives selon la nature de la mission. Chaque cas étant unique, un devis précis vous est remis gratuitement après échange.</p>
@@ -763,6 +764,7 @@ Ma promesse ? Une indépendance absolue. Je n'ai aucun lien avec les entreprises
   </div>
 
 
+  <script src="consent.js" defer></script>
   <script src="main.js"></script>
   <script>
     // ─── Apparition au scroll ───
